@@ -1,5 +1,7 @@
+import destyle from "destyle.css";
 import {
   Links,
+  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
@@ -13,6 +15,15 @@ export const meta: MetaFunction = () => ({
   title: "New Remix App",
   viewport: "width=device-width,initial-scale=1",
 });
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: destyle,
+    },
+  ];
+};
 
 export default function App() {
   return (
