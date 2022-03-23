@@ -6,13 +6,13 @@
   "sideEffects": false,
   "main": "build/index.js",
   "scripts": {
-    "dev": "remix build && run-p dev:*",
-    "build": "remix build",
-    "deploy": "npm run build && wrangler publish",
-    "dev:remix": "remix watch",
-    "dev:miniflare": "cross-env NODE_ENV=development miniflare ./build/index.js --watch",
+    "dev": "cross-env NODE_ENV=development remix build && run-p dev:*",
     "postinstall": "remix setup cloudflare-workers",
+    "build": "cross-env NODE_ENV=production remix build",
+    "dev:remix": "cross-env NODE_ENV=development remix watch",
+    "dev:miniflare": "cross-env NODE_ENV=development miniflare ./build/index.js --watch",
     "start": "cross-env NODE_ENV=production miniflare ./build/index.js",
+    "deploy": "npm run build && wrangler publish",
     "fauna-gen": "graphql-codegen --require dotenv/config --config app/graphql/fauna/codegen.yml",
     "graphCMS-gen": "graphql-codegen --require dotenv/config --config app/graphql/graphCMS/codegen.yml"
   },
