@@ -1,0 +1,257 @@
+directive @embedded on OBJECT
+
+directive @collection(name: String!) on OBJECT
+
+directive @index(name: String!) on FIELD_DEFINITION
+
+directive @resolver(
+  name: String
+  paginated: Boolean! = false
+) on FIELD_DEFINITION
+
+directive @relation(name: String) on FIELD_DEFINITION
+
+directive @unique(index: String) on FIELD_DEFINITION
+
+scalar Date
+
+type Mutation {
+  # Create a new document in the collection of 'Todo'
+  createTodo(
+    # 'Todo' input values
+    data: TodoInput!
+  ): Todo!
+
+  # Create a new document in the collection of 'People'
+  createPeople(
+    # 'People' input values
+    data: PeopleInput!
+  ): People!
+
+  # Update an existing document in the collection of 'Pizza'
+  updatePizza(
+    # The 'Pizza' document's ID
+    id: ID!
+
+    # 'Pizza' input values
+    data: PizzaInput!
+  ): Pizza
+
+  # Partially updates an existing document in the collection of 'Pizza'. It only modifies the values that are specified in the arguments. During execution, it verifies that required fields are not set to 'null'.
+  partialUpdatePizza(
+    # The 'Pizza' document's ID
+    id: ID!
+
+    # 'Pizza' input values
+    data: PartialUpdatePizzaInput!
+  ): Pizza
+
+  # Partially updates an existing document in the collection of 'Todo'. It only modifies the values that are specified in the arguments. During execution, it verifies that required fields are not set to 'null'.
+  partialUpdateTodo(
+    # The 'Todo' document's ID
+    id: ID!
+
+    # 'Todo' input values
+    data: PartialUpdateTodoInput!
+  ): Todo
+
+  # Delete an existing document in the collection of 'Pizza'
+  deletePizza(
+    # The 'Pizza' document's ID
+    id: ID!
+  ): Pizza
+
+  # Delete an existing document in the collection of 'People'
+  deletePeople(
+    # The 'People' document's ID
+    id: ID!
+  ): People
+
+  # Delete an existing document in the collection of 'Todo'
+  deleteTodo(
+    # The 'Todo' document's ID
+    id: ID!
+  ): Todo
+
+  # Update an existing document in the collection of 'People'
+  updatePeople(
+    # The 'People' document's ID
+    id: ID!
+
+    # 'People' input values
+    data: PeopleInput!
+  ): People
+
+  # Partially updates an existing document in the collection of 'People'. It only modifies the values that are specified in the arguments. During execution, it verifies that required fields are not set to 'null'.
+  partialUpdatePeople(
+    # The 'People' document's ID
+    id: ID!
+
+    # 'People' input values
+    data: PartialUpdatePeopleInput!
+  ): People
+
+  # Create a new document in the collection of 'Pizza'
+  createPizza(
+    # 'Pizza' input values
+    data: PizzaInput!
+  ): Pizza!
+
+  # Update an existing document in the collection of 'Todo'
+  updateTodo(
+    # The 'Todo' document's ID
+    id: ID!
+
+    # 'Todo' input values
+    data: TodoInput!
+  ): Todo
+}
+
+# 'People' input values
+input PartialUpdatePeopleInput {
+  firstName: String
+  lastName: String
+}
+
+# 'Pizza' input values
+input PartialUpdatePizzaInput {
+  base: String
+  toppings: [String]
+}
+
+# 'Todo' input values
+input PartialUpdateTodoInput {
+  task: String
+  completed: Boolean
+}
+
+# 'People' input values
+input PeopleInput {
+  firstName: String!
+  lastName: String!
+}
+
+# 'Pizza' input values
+input PizzaInput {
+  base: String
+  toppings: [String]
+}
+
+scalar Time
+
+# 'Todo' input values
+input TodoInput {
+  task: String!
+  completed: Boolean!
+}
+
+type People {
+  # The document's ID.
+  _id: ID!
+
+  # The document's timestamp.
+  _ts: Long!
+  firstName: String!
+  lastName: String!
+}
+
+# The pagination object for elements of type 'People'.
+type PeoplePage {
+  # The elements of type 'People' in this page.
+  data: [People]!
+
+  # A cursor for elements coming after the current page.
+  after: String
+
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+type Pizza {
+  # The document's ID.
+  _id: ID!
+
+  # The document's timestamp.
+  _ts: Long!
+  base: String
+  toppings: [String]
+}
+
+# The pagination object for elements of type 'Pizza'.
+type PizzaPage {
+  # The elements of type 'Pizza' in this page.
+  data: [Pizza]!
+
+  # A cursor for elements coming after the current page.
+  after: String
+
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+type Query {
+  allPeople(
+    # The number of items to return per page.
+    _size: Int
+
+    # The pagination cursor.
+    _cursor: String
+  ): PeoplePage!
+  allTodos(
+    # The number of items to return per page.
+    _size: Int
+
+    # The pagination cursor.
+    _cursor: String
+  ): TodoPage!
+
+  # Find a document from the collection of 'Pizza' by its id.
+  findPizzaByID(
+    # The 'Pizza' document's ID
+    id: ID!
+  ): Pizza
+
+  # Find a document from the collection of 'Todo' by its id.
+  findTodoByID(
+    # The 'Todo' document's ID
+    id: ID!
+  ): Todo
+  allPizza(
+    # The number of items to return per page.
+    _size: Int
+
+    # The pagination cursor.
+    _cursor: String
+  ): PizzaPage!
+
+  # Find a document from the collection of 'People' by its id.
+  findPeopleByID(
+    # The 'People' document's ID
+    id: ID!
+  ): People
+}
+
+type Todo {
+  # The document's ID.
+  _id: ID!
+
+  # The document's timestamp.
+  _ts: Long!
+  task: String!
+  completed: Boolean!
+}
+
+# The pagination object for elements of type 'Todo'.
+type TodoPage {
+  # The elements of type 'Todo' in this page.
+  data: [Todo]!
+
+  # A cursor for elements coming after the current page.
+  after: String
+
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+# The `Long` scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long

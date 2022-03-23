@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "@remix-run/eslint-config",
+    "prettier"
+  ],
+  "rules": {
+    "react/jsx-key": "error"
+  }
+}

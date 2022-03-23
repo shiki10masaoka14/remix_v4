@@ -1,0 +1,7 @@
+query Assets($OR: [AssetWhereInput!]) {
+  assets(where: { OR: $OR }) {
+    id
+    fileName
+    url
+  }
+}

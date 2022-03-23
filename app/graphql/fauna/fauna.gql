@@ -1,0 +1,85 @@
+query AllTodos {
+  allTodos {
+    data {
+      _id
+      task
+      completed
+    }
+  }
+}
+
+mutation CreateTodo($data: TodoInput!) {
+  createTodo(data: $data) {
+    _id
+    task
+    completed
+  }
+}
+
+mutation PartialUpdateTodo(
+  $id: ID!
+  $data: PartialUpdateTodoInput!
+) {
+  partialUpdateTodo(id: $id, data: $data) {
+    _id
+    task
+    completed
+  }
+}
+
+mutation DeleteTodo($id: ID!) {
+  deleteTodo(id: $id) {
+    _id
+  }
+}
+
+query AllPeople {
+  allPeople {
+    data {
+      _id
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation CreatePeople($data: PeopleInput!) {
+  createPeople(data: $data) {
+    _id
+  }
+}
+
+mutation DeletePeople($id: ID!) {
+  deletePeople(id: $id) {
+    _id
+  }
+}
+
+mutation CreatePizza($data: PizzaInput!) {
+  createPizza(data: $data) {
+    _id
+  }
+}
+
+mutation PartialUpdatePizza(
+  $id: ID!
+  $data: PartialUpdatePizzaInput!
+) {
+  partialUpdatePizza(id: $id, data: $data) {
+    _id
+  }
+}
+
+query FindPizzaByID($id: ID!) {
+  findPizzaByID(id: $id) {
+    _id
+    base
+    toppings
+  }
+}
+
+mutation DeletePizza($id: ID!) {
+  deletePizza(id: $id) {
+    _id
+  }
+}

@@ -1,0 +1,20 @@
+type Todo {
+  task: String!
+  completed: Boolean!
+}
+
+type People {
+  firstName: String!
+  lastName: String!
+}
+
+type Pizza {
+  base: String
+  toppings: [String]
+}
+
+type Query {
+  allTodos: [Todo]
+  allPeople: [People]
+  allPizza: [Pizza]
+}
